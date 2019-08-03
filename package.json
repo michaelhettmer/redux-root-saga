@@ -1,0 +1,26 @@
+{
+  "name": "redux-root-saga",
+  "version": "1.0.0",
+  "description": "Configurable redux-saga startup and management",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelHettmer/redux-root-saga.git"
+  },
+  "keywords": [
+    "redux",
+    "redux-saga"
+  ],
+  "author": "Michael Hettmer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MichaelHettmer/redux-root-saga/issues"
+  },
+  "homepage": "https://github.com/MichaelHettmer/redux-root-saga#readme",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
+}
