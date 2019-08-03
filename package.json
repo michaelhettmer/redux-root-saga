@@ -22,5 +22,8 @@
   "homepage": "https://github.com/MichaelHettmer/redux-root-saga#readme",
   "devDependencies": {
     "jest": "^24.8.0"
+  },
+  "peerDependencies": {
+    "redux-saga": "^1.0.5"
   }
 }
