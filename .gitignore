@@ -88,4 +88,7 @@ typings/
 .dynamodb/
 
 # vscode
-.vscode
+/.vscode
+
+# compiled code
+/dist
