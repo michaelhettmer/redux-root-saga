@@ -25,6 +25,13 @@ export interface Options {
      * Delay between saga crash and saga restart. Default is 1000ms.
      */
     restartDelay?: number;
+
+    /**
+     * Maximum number of tries to restart a child saga until its execution is suspended.
+     * Counts per saga. Default value is 'Infinity' so the child saga will always be restarted
+     * if it throws an exception.
+     */
+    maxRetries?: number;
 }
 
 /**
@@ -33,19 +40,24 @@ export interface Options {
  * @param sagas Array of child sagas the root saga should manage.
  * @param options Specify and control the behavior of the root saga and how the execution of the child sagas is managed.
  */
-const createRootSaga = (sagas: Saga[], { errorHandler = defaultErrorHandler, restartDelay = 1000 }: Options) => {
+const createRootSaga = (
+    sagas: Saga[],
+    { errorHandler = defaultErrorHandler, restartDelay = 1000, maxRetries = Infinity }: Options,
+) => {
     return function* rootSaga() {
         yield all(
             sagas.map(saga =>
                 spawn(function* spawnedSaga() {
                     while (true) {
-                        try {
-                            yield call(saga);
-                            break;
-                        } catch (e) {
-                            errorHandler(e, saga);
+                        for (let i = 0; i < maxRetries; i++) {
+                            try {
+                                yield call(saga);
+                                break;
+                            } catch (e) {
+                                errorHandler(e, saga);
+                            }
+                            yield delay(restartDelay);
                         }
-                        yield delay(restartDelay);
                     }
                 }),
             ),
