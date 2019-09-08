@@ -1,3 +1,7 @@
 dist
 coverage
 node_modules
+
+# eslint ignores hidden files by default
+!.*
+**/node_modules

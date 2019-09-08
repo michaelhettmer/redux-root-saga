@@ -2,6 +2,20 @@
   "name": "redux-root-saga",
   "version": "1.0.0",
   "description": "Configurable redux-saga startup and management",
+  "keywords": [
+    "redux",
+    "redux-saga"
+  ],
+  "homepage": "https://github.com/MichaelHettmer/redux-root-saga#readme",
+  "bugs": {
+    "url": "https://github.com/MichaelHettmer/redux-root-saga/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelHettmer/redux-root-saga.git"
+  },
+  "license": "MIT",
+  "author": "Michael Hettmer",
   "files": [
     "dist/**/*"
   ],
@@ -9,37 +23,26 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "lint": "eslint . --fix --ext '.js,.jsx,.ts,.tsx,.json,.jsonc'",
     "test": "jest",
-    "test:coverage": "yarn test --coverage --watchAll=false",
     "test:ci": "CI=true yarn test:coverage",
-    "lint": "eslint . --fix --ext '.js,.jsx,.ts,.tsx'"
+    "test:coverage": "yarn test --coverage --watchAll=false"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MichaelHettmer/redux-root-saga.git"
-  },
-  "keywords": [
-    "redux",
-    "redux-saga"
-  ],
-  "author": "Michael Hettmer",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/MichaelHettmer/redux-root-saga/issues"
-  },
-  "homepage": "https://github.com/MichaelHettmer/redux-root-saga#readme",
   "devDependencies": {
     "@types/jest": "^24.0.18",
     "@typescript-eslint/eslint-plugin": "^2.1.0",
     "@typescript-eslint/parser": "^2.1.0",
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.2.0",
+    "eslint-plugin-json-format": "^2.0.1",
     "eslint-plugin-prettier": "^3.1.0",
     "husky": "^3.0.5",
     "jest": "^24.9.0",
     "lint-staged": "^9.2.5",
     "prettier": "^1.18.2",
     "redux-saga": "*",
+    "redux-saga-test-plan": "^4.0.0-rc.1",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.5.3"
   },
   "peerDependencies": {
