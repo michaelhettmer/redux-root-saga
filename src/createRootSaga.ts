@@ -1,7 +1,7 @@
 import { all, spawn, call } from 'redux-saga/effects';
 import { Saga } from '@redux-saga/types';
 
-const defaultErrorHandler = (e: any, saga: Saga) => {
+const defaultErrorHandler = (e: unknown, saga: Saga) => {
     console.warn(`${saga.name} has failed`, e);
 };
 
