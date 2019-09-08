@@ -48,16 +48,14 @@ const createRootSaga = (
         yield all(
             sagas.map(saga =>
                 spawn(function* spawnedSaga() {
-                    while (true) {
-                        for (let i = 0; i < maxRetries; i++) {
-                            try {
-                                yield call(saga);
-                                break;
-                            } catch (e) {
-                                errorHandler(e, saga);
-                            }
-                            yield delay(restartDelay);
+                    for (let i = 0; i < maxRetries; i++) {
+                        try {
+                            yield call(saga);
+                            break;
+                        } catch (e) {
+                            errorHandler(e, saga);
                         }
+                        if (maxRetries > 0) yield delay(restartDelay);
                     }
                 }),
             ),
