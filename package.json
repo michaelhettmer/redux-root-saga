@@ -1,7 +1,7 @@
 {
   "name": "redux-root-saga",
   "version": "1.0.0",
-  "description": "Configurable redux-saga startup and management",
+  "description": "Configurable redux-saga execution management.",
   "keywords": [
     "redux",
     "redux-saga"
