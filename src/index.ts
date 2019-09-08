@@ -1,4 +1,3 @@
-import createRootSaga from './createRootSaga';
+export { default } from './createRootSaga';
 
 export * from './createRootSaga';
-export default createRootSaga;
