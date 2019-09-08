@@ -43,7 +43,7 @@
     "redux-saga": "*",
     "redux-saga-test-plan": "^4.0.0-rc.1",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.5.3"
+    "typescript": "^3.6.2"
   },
   "peerDependencies": {
     "redux-saga": "*"

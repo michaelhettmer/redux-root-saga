@@ -1,5 +1,5 @@
-import { all, spawn, call, delay } from 'redux-saga/effects';
-import { Saga } from '@redux-saga/types';
+import { all, spawn, call, delay, ForkEffectDescriptor } from 'redux-saga/effects';
+import { Saga, CombinatorEffect, SimpleEffect } from '@redux-saga/types';
 
 /**
  * Default error handling implementation. Prints the thrown exception argument
@@ -43,7 +43,7 @@ export interface Options {
 const createRootSaga = (
     sagas: Saga[],
     { errorHandler = defaultErrorHandler, restartDelay = 1000, maxRetries = Infinity }: Options = {},
-) => {
+): (() => Generator<CombinatorEffect<'ALL', SimpleEffect<'FORK', ForkEffectDescriptor>>, void, unknown>) => {
     return function* rootSaga() {
         yield all(
             sagas.map(saga =>
