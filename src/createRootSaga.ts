@@ -5,7 +5,11 @@ const defaultErrorHandler = (e: unknown, saga: Saga) => {
     console.warn(`${saga.name} has failed`, e);
 };
 
-const createRootSaga = (sagas: Saga[], errorHandler = defaultErrorHandler) => {
+interface Options {
+    errorHandler?: (e: unknown, saga: Saga) => void;
+}
+
+const createRootSaga = (sagas: Saga[], { errorHandler = defaultErrorHandler }: Options) => {
     return function* rootSaga() {
         yield all(
             sagas.map(saga =>
