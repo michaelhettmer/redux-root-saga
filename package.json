@@ -2,12 +2,17 @@
   "name": "redux-root-saga",
   "version": "1.0.0",
   "description": "Configurable redux-saga startup and management",
-  "files": ["dist/**/*"],
+  "files": [
+    "dist/**/*"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "yarn test --coverage --watchAll=false",
+    "test:ci": "CI=true yarn test:coverage",
+    "lint": "eslint . --fix --ext '.js,.jsx,.ts,.tsx'"
   },
   "repository": {
     "type": "git",
@@ -24,9 +29,18 @@
   },
   "homepage": "https://github.com/MichaelHettmer/redux-root-saga#readme",
   "devDependencies": {
-    "jest": "^24.8.0",
-    "typescript": "^3.5.3",
-    "redux-saga": "*"
+    "@types/jest": "^24.0.18",
+    "@typescript-eslint/eslint-plugin": "^2.1.0",
+    "@typescript-eslint/parser": "^2.1.0",
+    "eslint": "^6.3.0",
+    "eslint-config-prettier": "^6.2.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^3.0.5",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.2.5",
+    "prettier": "^1.18.2",
+    "redux-saga": "*",
+    "typescript": "^3.5.3"
   },
   "peerDependencies": {
     "redux-saga": "*"
