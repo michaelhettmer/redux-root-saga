@@ -1,5 +1,11 @@
 # Redux Root Saga
 
+![npm version](https://img.shields.io/npm/v/redux-root-saga)
+![npm](https://img.shields.io/npm/dm/redux-root-saga)
+![npm bundle size](https://img.shields.io/bundlephobia/min/redux-root-saga)
+![NPM](https://img.shields.io/npm/l/redux-root-saga)
+![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/redux-root-saga)
+
 ## Configurable redux-saga execution management
 
 Redux Root Saga provides an easy way to quickly run multiple sagas concurrently in a tested and widely used way.
@@ -13,7 +19,20 @@ Additionally the root saga behavior was extended by the following fully configur
 * Default error handling with a warning message including the saga name
 * Custom error handling callback
 
-## Example usage
+# Getting started
+
+## Install
+
+```sh
+$ npm install --save redux-root-saga
+```
+or
+
+```sh
+$ yarn add redux-root-saga
+```
+
+## Usage Example
 
 ``` typescript
 import { createStore, applyMiddleware } from 'redux';
