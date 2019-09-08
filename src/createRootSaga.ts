@@ -35,14 +35,14 @@ export interface Options {
 }
 
 /**
- *  Create a root saga which starts and manages the execution of 1:n child sagas.
+ *  Creates a root saga which starts and manages the execution of 1:n child sagas.
  *
  * @param sagas Array of child sagas the root saga should manage.
  * @param options Specify and control the behavior of the root saga and how the execution of the child sagas is managed.
  */
 const createRootSaga = (
     sagas: Saga[],
-    { errorHandler = defaultErrorHandler, restartDelay = 1000, maxRetries = Infinity }: Options,
+    { errorHandler = defaultErrorHandler, restartDelay = 1000, maxRetries = Infinity }: Options = {},
 ) => {
     return function* rootSaga() {
         yield all(
