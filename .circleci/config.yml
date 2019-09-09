@@ -1,170 +1,170 @@
 version: 2.1
 
 defaults: &defaults
-    working_directory: ~/repo
-    docker:
-        - image: circleci/node:12.10.0
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:12.10.0
 
 whitelist: &whitelist
-    paths:
-        - .npmignore
-        - coverage/*
-        - dist/*
-        - node_modules/*
-        - src/*
-        - .eslintignore
-        - .eslintrc.js
-        - .huskyrc.js
-        - .prettierignore
-        - .prettierrc.js
-        - jest.config.js
-        - LICENSE.md
-        - lint-staged.config.js
-        - package.json
-        - README.md
-        - tsconfig.json
+  paths:
+    - .npmignore
+    - coverage/*
+    - dist/*
+    - node_modules/*
+    - src/*
+    - .eslintignore
+    - .eslintrc.js
+    - .huskyrc.js
+    - .prettierignore
+    - .prettierrc.js
+    - jest.config.js
+    - LICENSE.md
+    - lint-staged.config.js
+    - package.json
+    - README.md
+    - tsconfig.json
 
 jobs:
-    checkout:
-        <<: *defaults
-        steps:
-            - checkout
-            - restore_cache:
-                  keys:
-                      - v1-dependencies-{{ checksum "package.json" }}
-                      - v1-dependencies-
-            - run:
-                  name: Install Dependencies
-                  command: yarn install
-            - save_cache:
-                  paths:
-                      - node_modules
-                  key: v1-dependencies-{{ checksum "package.json" }}
-            - persist_to_workspace:
-                  root: ~/repo
-                  <<: *whitelist
+  checkout:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - persist_to_workspace:
+          root: ~/repo
+          <<: *whitelist
 
-    lint:
-        <<: *defaults
-        steps:
-            - attach_workspace:
-                  at: ~/repo
-            - run:
-                  name: Lint TypeScript code
-                  command: yarn lint
+  lint:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Lint TypeScript code
+          command: yarn lint
 
-    test:
-        <<: *defaults
-        steps:
-            - attach_workspace:
-                  at: ~/repo
-            - run:
-                  name: Test TypeScript code
-                  command: yarn test:ci
-            - persist_to_workspace:
-                  root: ~/repo
-                  <<: *whitelist
+  test:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Test TypeScript code
+          command: yarn test:ci
+      - persist_to_workspace:
+          root: ~/repo
+          <<: *whitelist
 
-    coveralls:
-        <<: *defaults
-        steps:
-            - attach_workspace:
-                  at: ~/repo
-            - run:
-                  name: Submit coverage report to Coveralls.io
-                  command: yarn coveralls
+  coveralls:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Submit coverage report to Coveralls.io
+          command: yarn coveralls
 
-    build:
-        <<: *defaults
-        steps:
-            - attach_workspace:
-                  at: ~/repo
-            - run:
-                  name: Build TypeScript code
-                  command: yarn build
-            - persist_to_workspace:
-                  root: ~/repo
-                  <<: *whitelist
+  build:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Build TypeScript code
+          command: yarn build
+      - persist_to_workspace:
+          root: ~/repo
+          <<: *whitelist
 
-      deploy:
-            <<: *defaults
-            steps:
-                  - attach_workspace:
-                        at: ~/repo
-                  - run: 
-                        name: Write NPM Token to ~/.npmrc
-                        command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-                  - run:
-                        name: Write version to package.json
-                        command: $(yarn bin)/dot-json package.json version ${CIRCLE_TAG:1}
-                  - run:
-                        name: Publish to NPM
-                        command: npm publish --access=public
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Write NPM Token to ~/.npmrc
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+      - run:
+          name: Write version to package.json
+          command: $(yarn bin)/dot-json package.json version ${CIRCLE_TAG:1}
+      - run:
+          name: Publish to NPM
+          command: npm publish --access=public
 
 workflows:
-    build:
-        jobs:
+  build:
+    jobs:
+      - checkout
+      - test:
+          requires:
             - checkout
-            - test:
-                  requires:
-                      - checkout
-            - lint:
-                  requires:
-                      - checkout
-            - coveralls:
-                  requires:
-                      - test
-            - build:
-                  requires:
-                      - test
-                      - lint
+      - lint:
+          requires:
+            - checkout
+      - coveralls:
+          requires:
+            - test
+      - build:
+          requires:
+            - test
+            - lint
 
-      release:
-            jobs:
-                  - checkout:
-                        filters:
-                              tags:
-                                    only: /v[0-9]+(\.[0-9]+)*/
-                              branches:
-                                    ignore: /.*/
-                  - test:
-                        filters:
-                              tags:
-                                    only: /v[0-9]+(\.[0-9]+)*/
-                              branches:
-                                    ignore: /.*/
-                        requires:
-                              - checkout
-                  - lint:
-                        filters:
-                              tags:
-                                    only: /v[0-9]+(\.[0-9]+)*/
-                              branches:
-                                    ignore: /.*/
-                        requires:
-                              - checkout
-                  - coveralls:
-                        filters:
-                              tags:
-                                    only: /v[0-9]+(\.[0-9]+)*/
-                              branches:
-                                    ignore: /.*/
-                        requires:
-                              - test
-                  - build:
-                        filters:
-                              tags:
-                                    only: /v[0-9]+(\.[0-9]+)*/
-                              branches:
-                                    ignore: /.*/
-                        requires:
-                              - test
-                              - lint
-                  - deploy:
-                        filters:
-                              tags:
-                                    only: /v[0-9]+(\.[0-9]+)*/
-                              branches:
-                                    ignore: /.*/
-                        requires:
-                              - build
+release:
+  jobs:
+    - checkout:
+        filters:
+          tags:
+            only: /v[0-9]+(\.[0-9]+)*/
+          branches:
+            ignore: /.*/
+    - test:
+        filters:
+          tags:
+            only: /v[0-9]+(\.[0-9]+)*/
+          branches:
+            ignore: /.*/
+        requires:
+          - checkout
+    - lint:
+        filters:
+          tags:
+            only: /v[0-9]+(\.[0-9]+)*/
+          branches:
+            ignore: /.*/
+        requires:
+          - checkout
+    - coveralls:
+        filters:
+          tags:
+            only: /v[0-9]+(\.[0-9]+)*/
+          branches:
+            ignore: /.*/
+        requires:
+          - test
+    - build:
+        filters:
+          tags:
+            only: /v[0-9]+(\.[0-9]+)*/
+          branches:
+            ignore: /.*/
+        requires:
+          - test
+          - lint
+    - deploy:
+        filters:
+          tags:
+            only: /v[0-9]+(\.[0-9]+)*/
+          branches:
+            ignore: /.*/
+        requires:
+          - build

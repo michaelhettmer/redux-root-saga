@@ -26,8 +26,8 @@
   "scripts": {
     "build": "tsc",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "lint": "eslint . --fix --ext '.js,.jsx,.ts,.tsx,.json,.jsonc'",
-    "lint:fix": "eslint . --ext '.js,.jsx,.ts,.tsx,.json,.jsonc'",
+    "lint": "eslint . --ext '.js,.jsx,.ts,.tsx,.json,.jsonc'",
+    "lint:fix": "yarn lint --fix",
     "test": "jest",
     "test:ci": "CI=true yarn test:coverage",
     "test:coverage": "yarn test --coverage --watchAll=false"
