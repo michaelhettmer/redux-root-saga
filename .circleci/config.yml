@@ -1,0 +1,105 @@
+version: 2.1
+
+defaults: &defaults
+    working_directory: ~/repo
+    docker:
+        - image: circleci/node:12.10.0
+
+whitelist: &whitelist
+    paths:
+        - .npmignore
+        - coverage/*
+        - dist/*
+        - node_modules/*
+        - src/*
+        - .eslintignore
+        - .eslintrc.js
+        - .huskyrc.js
+        - .prettierignore
+        - .prettierrc.js
+        - jest.config.js
+        - LICENSE.md
+        - lint-staged.config.js
+        - package.json
+        - README.md
+        - tsconfig.json
+
+jobs:
+    checkout:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                  keys:
+                      - v1-dependencies-{{ checksum "package.json" }}
+                      - v1-dependencies-
+            - run:
+                  name: Install Dependencies
+                  command: yarn install
+            - save_cache:
+                  paths:
+                      - node_modules
+                  key: v1-dependencies-{{ checksum "package.json" }}
+            - persist_to_workspace:
+                  root: ~/repo
+                  <<: *whitelist
+
+    lint:
+        <<: *defaults
+        steps:
+            - attach_workspace:
+                  at: ~/repo
+            - run:
+                  name: Lint TypeScript code
+                  command: yarn lint
+
+    test:
+        <<: *defaults
+        steps:
+            - attach_workspace:
+                  at: ~/repo
+            - run:
+                  name: Test TypeScript code
+                  command: yarn test:ci
+            - persist_to_workspace:
+                  root: ~/repo
+                  <<: *whitelist
+
+    coveralls:
+        <<: *defaults
+        steps:
+            - attach_workspace:
+                  at: ~/repo
+            - run:
+                  name: Submit coverage report to Coveralls.io
+                  command: yarn coveralls
+
+    build:
+        <<: *defaults
+        steps:
+            - attach_workspace:
+                  at: ~/repo
+            - run:
+                  name: Build TypeScript code
+                  command: yarn build
+            - persist_to_workspace:
+                  root: ~/repo
+                  <<: *whitelist
+
+workflows:
+    build:
+        jobs:
+            - checkout
+            - test:
+                  requires:
+                      - checkout
+            - lint:
+                  requires:
+                      - checkout
+            - coveralls:
+                  requires:
+                      - test
+            - build:
+                  requires:
+                      - test
+                      - lint
