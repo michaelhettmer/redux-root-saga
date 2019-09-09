@@ -25,21 +25,19 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
     "lint": "eslint . --fix --ext '.js,.jsx,.ts,.tsx,.json,.jsonc'",
     "lint:fix": "eslint . --ext '.js,.jsx,.ts,.tsx,.json,.jsonc'",
-    "prepare": "yarn build",
-    "prepublishOnly": "yarn test && yarn lint",
     "test": "jest",
     "test:ci": "CI=true yarn test:coverage",
-    "test:coverage": "yarn test --coverage --watchAll=false",
-    "preversion": "yarn lint",
-    "version": "yarn lint:fix && git add -A src",
-    "postversion": "git push && git push --tags"
+    "test:coverage": "yarn test --coverage --watchAll=false"
   },
+  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^24.0.18",
     "@typescript-eslint/eslint-plugin": "^2.1.0",
     "@typescript-eslint/parser": "^2.1.0",
+    "coveralls": "^3.0.6",
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.2.0",
     "eslint-plugin-json-format": "^2.0.1",
