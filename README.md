@@ -2,9 +2,11 @@
 
 ![npm version](https://img.shields.io/npm/v/redux-root-saga)
 ![npm](https://img.shields.io/npm/dm/redux-root-saga)
+![CircleCI](https://img.shields.io/circleci/build/github/MichaelHettmer/redux-root-saga)
+![Coveralls github](https://img.shields.io/coveralls/github/MichaelHettmer/redux-root-saga)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/redux-root-saga)
-![NPM](https://img.shields.io/npm/l/redux-root-saga)
 ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/redux-root-saga)
+![NPM](https://img.shields.io/npm/l/redux-root-saga)
 
 ## Configurable redux-saga execution management
 
