@@ -30,7 +30,7 @@
     "lint:fix": "eslint . --ext '.js,.jsx,.ts,.tsx,.json,.jsonc'",
     "test": "jest",
     "test:ci": "CI=true yarn test:coverage",
-    "test:coverage": "yarn test --coverage --coverageReporters=text-lcov --watchAll=false"
+    "test:coverage": "yarn test --coverage --watchAll=false"
   },
   "dependencies": {},
   "devDependencies": {
