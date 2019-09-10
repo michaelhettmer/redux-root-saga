@@ -22,20 +22,20 @@ Additionally the root saga behavior was extended by the following fully configur
 * Default error handling with a warning message including the saga name
 * Custom error handling callback
 
-# Getting started
+## Getting started
 
-## Install
+### Install
 
 ```sh
-$ npm install --save redux-root-saga
+npm install --save redux-root-saga
 ```
 or
 
 ```sh
-$ yarn add redux-root-saga
+yarn add redux-root-saga
 ```
 
-## Usage Example
+### Usage Example
 
 ``` typescript
 import { createStore, applyMiddleware } from 'redux';
