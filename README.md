@@ -4,7 +4,7 @@
 [![circleci](https://circleci.com/gh/MichaelHettmer/redux-root-saga.svg?style=shield)](https://circleci.com/gh/MichaelHettmer/redux-root-saga)
 [![codecov](https://codecov.io/gh/MichaelHettmer/redux-root-saga/branch/master/graph/badge.svg)](https://codecov.io/gh/MichaelHettmer/redux-root-saga)
 [![npm version](https://img.shields.io/npm/v/redux-root-saga)](https://www.npmjs.com/package/redux-root-saga)
-[![npm downloads](https://img.shields.io/npm/dm/redux-root-saga)](https://www.npmjs.com/package/redux-root-saga)
+[![npm downloads](https://img.shields.io/npm/dw/redux-root-saga)](https://www.npmjs.com/package/redux-root-saga)
 [![pull requests](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/MichaelHettmer/redux-root-saga/compare)
 [![discord](https://img.shields.io/discord/620938362379042837)](https://discord.gg/R2jNASR)
 [![twitter](https://img.shields.io/twitter/follow/MichaelHettmer.svg?label=Follow%20@MichaelHettmer)](https://twitter.com/intent/follow?screen_name=MichaelHettmer)
@@ -26,12 +26,13 @@ Additionally the root saga behavior was extended by the following fully configur
 
 ### Install
 
-```sh
+``` sh
 npm install --save redux-root-saga
 ```
+
 or
 
-```sh
+``` sh
 yarn add redux-root-saga
 ```
 
@@ -40,17 +41,33 @@ yarn add redux-root-saga
 ``` typescript
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from '@redux-saga/core';
-import { createRootSaga } from 'redux-root-saga';
+import createRootSaga from 'redux-root-saga';
 
-function* saga1() { /*...*/ }
-function* saga2() { /*...*/ }
+function* saga1() {
+    /*...*/
+}
+function* saga2() {
+    /*...*/
+}
 
+// Option 1: Execute all specified sagas concurrently with default options.
+const rootSaga = createRootSaga([saga1, saga2]);
+
+// Option 2: Start all sagas with (partly) customized default options.
 const rootSaga = createRootSaga([saga1, saga2], {
     maxRetries: 3,
-    errorHandler: (error, saga) => console.err(`Error in saga ${saga.name}: ${error}`);
+    errorHandler: (error, saga, options) => console.err( `Error in saga ${saga.name} with options ${options}: ${error}` );
+});
+
+// Option 3: Start all sagas with (partly) customized default options and use specific custom options only for saga1.
+// All other options of saga1 fallback to the (customized) default ones.
+const rootSaga = createRootSaga([[saga1, { maxRetries: Infinity }], saga2], {
+    maxRetries: 3,
+    onError: (error, saga, options) => console.error( `Error in saga ${saga.name} with options ${options}: ${error}` ),
 });
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootSaga);
 ```
+
