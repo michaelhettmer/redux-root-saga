@@ -19,7 +19,7 @@ export interface Options {
     /**
      * Error handler that gets called when a saga throws an execption.
      */
-    errorHandler?: (e: unknown, saga: Saga) => void;
+    onError?: (e: unknown, saga: Saga) => void;
 
     /**
      * Delay between saga crash and saga restart. Default is 1000ms.
@@ -42,7 +42,7 @@ export interface Options {
  */
 const createRootSaga = (
     sagas: Saga[],
-    { errorHandler = defaultErrorHandler, restartDelay = 1000, maxRetries = Infinity }: Options = {},
+    { onError = defaultErrorHandler, restartDelay = 1000, maxRetries = Infinity }: Options = {},
 ): (() => Generator<CombinatorEffect<'ALL', SimpleEffect<'FORK', ForkEffectDescriptor>>, void, unknown>) => {
     return function* rootSaga() {
         yield all(
@@ -53,7 +53,7 @@ const createRootSaga = (
                             yield call(saga);
                             break;
                         } catch (e) {
-                            errorHandler(e, saga);
+                            onError(e, saga);
                         }
                         if (maxRetries > 1) yield delay(restartDelay);
                     }

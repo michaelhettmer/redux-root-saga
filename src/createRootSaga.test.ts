@@ -51,7 +51,7 @@ describe('test saga management with createRootSaga', () => {
         await expectSaga(
             createRootSaga([saga1, saga2], {
                 maxRetries: 1,
-                errorHandler: () => {
+                onError: () => {
                     errorCounts++;
                 },
             }),
