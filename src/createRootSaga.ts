@@ -8,8 +8,8 @@ import { Saga, CombinatorEffect, SimpleEffect } from '@redux-saga/types';
  * @param e The exception argument that got thrown. Usually of type Error('message').
  * @param saga The saga that throw the exception.
  */
-export const defaultErrorHandler = (e: unknown, saga: Saga) => {
-    console.warn(`${saga.name} has failed`, e);
+export const defaultErrorHandler = (error: unknown, saga: Saga, options: Options) => {
+    console.warn(`Error in saga ${saga.name} with options ${options}: ${error}`);
 };
 
 /**
