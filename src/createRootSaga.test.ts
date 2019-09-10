@@ -59,4 +59,16 @@ describe('test saga management with createRootSaga', () => {
 
         expect(errorCounts).toBe(4);
     });
+
+    it('should use custom options if available and otherwise fallback to default options', async () => {
+        function* saga() {
+            yield delay(0);
+            throw new Error('error in saga');
+        }
+        mockConsole('warn');
+        await expectSaga(
+            createRootSaga([[saga, {}], [saga, { maxRetries: 3 }]], { maxRetries: 2, restartDelay: 0 }),
+        ).run();
+        expect(console.warn).toHaveBeenCalledTimes(7);
+    });
 });
