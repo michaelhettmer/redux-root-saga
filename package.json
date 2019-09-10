@@ -25,7 +25,6 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "coveralls": "cat ./coverage/lcov.info | coveralls",
     "lint": "eslint . --ext '.js,.jsx,.ts,.tsx,.json,.jsonc'",
     "lint:fix": "yarn lint --fix",
     "test": "jest",
@@ -37,7 +36,6 @@
     "@types/jest": "^24.0.18",
     "@typescript-eslint/eslint-plugin": "^2.1.0",
     "@typescript-eslint/parser": "^2.1.0",
-    "coveralls": "^3.0.6",
     "dot-json": "^1.1.0",
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.2.0",
