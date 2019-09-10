@@ -1,12 +1,13 @@
 # Redux Root Saga
 
-![npm version](https://img.shields.io/npm/v/redux-root-saga)
-![npm](https://img.shields.io/npm/dm/redux-root-saga)
-![CircleCI](https://img.shields.io/circleci/build/github/MichaelHettmer/redux-root-saga)
-![Coveralls github](https://img.shields.io/coveralls/github/MichaelHettmer/redux-root-saga)
-![npm bundle size](https://img.shields.io/bundlephobia/min/redux-root-saga)
-![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/redux-root-saga)
-![NPM](https://img.shields.io/npm/l/redux-root-saga)
+[![license](https://img.shields.io/npm/l/redux-root-saga)](https://github.com/MichaelHettmer/redux-root-saga/blob/master/LICENSE.md)
+[![circleci](https://circleci.com/gh/MichaelHettmer/redux-root-saga.svg?style=shield)](https://circleci.com/gh/MichaelHettmer/redux-root-saga)
+[![codecov](https://codecov.io/gh/MichaelHettmer/redux-root-saga/branch/master/graph/badge.svg)](https://codecov.io/gh/MichaelHettmer/redux-root-saga)
+[![npm version](https://img.shields.io/npm/v/redux-root-saga)](https://www.npmjs.com/package/redux-root-saga)
+[![npm downloads](https://img.shields.io/npm/dm/redux-root-saga)](https://www.npmjs.com/package/redux-root-saga)
+[![pull requests](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/MichaelHettmer/redux-root-saga/compare)
+[![discord](https://img.shields.io/discord/620938362379042837)](https://discord.gg/R2jNASR)
+[![twitter](https://img.shields.io/twitter/follow/MichaelHettmer.svg?label=Follow%20@MichaelHettmer)](https://twitter.com/intent/follow?screen_name=MichaelHettmer)
 
 ## Configurable redux-saga execution management
 
@@ -21,20 +22,20 @@ Additionally the root saga behavior was extended by the following fully configur
 * Default error handling with a warning message including the saga name
 * Custom error handling callback
 
-# Getting started
+## Getting started
 
-## Install
+### Install
 
 ```sh
-$ npm install --save redux-root-saga
+npm install --save redux-root-saga
 ```
 or
 
 ```sh
-$ yarn add redux-root-saga
+yarn add redux-root-saga
 ```
 
-## Usage Example
+### Usage Example
 
 ``` typescript
 import { createStore, applyMiddleware } from 'redux';
