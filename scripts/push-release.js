@@ -38,22 +38,22 @@ git.Repository.open('.')
             .then(function(result) {
                 const currentBranchName = result.shorthand();
                 if (currentBranchName === 'master') {
-                    // update npm package version number
+                    // update npm package version number and commit modified package.json to master
                     packageJson.set('version', version).save();
-                    const cmdVersionUpdate = `git add package.json 
-                                && git commit -S -m "Bump package.json version number to ${version}"
-                                && git push origin master`;
-                    const versionUpdateResult = exec(`${cmdVersionUpdate}`);
-                    if (!versionUpdateResult || versionUpdateResult.code !== 0) {
+                    const cmdVersionUpdate = `git add package.json`;
+                    const cmdVersionCommit = `git commit -S -m "Bump package.json version number to ${version}"`;
+                    const cmdVersionPush = `git push origin master`;
+                    const cmdVersionResult = exec(`${cmdVersionUpdate} && ${cmdVersionCommit} && ${cmdVersionPush}`);
+                    if (!cmdVersionResult || cmdVersionResult.code !== 0) {
                         console.error('version update of package.json failed');
                         exit(1);
                     }
 
                     // create and push release tag
                     const cmdTag = `git tag -s "${versionString}" -m "Release of ${versionString}"`;
-                    const cmdPushTag = `git push origin "${versionString}"`;
-                    const tagResult = exec(`${cmdTag} && ${cmdPushTag}`);
-                    if (!tagResult || tagResult.code !== 0) {
+                    const cmdTagPush = `git push origin "${versionString}"`;
+                    const cmdTagResult = exec(`${cmdTag} && ${cmdTagPush}`);
+                    if (!cmdTagResult || cmdTagResult.code !== 0) {
                         console.error('release tag creation / push failed');
                         exit(1);
                     } else console.log('successfully tagged a new release');
