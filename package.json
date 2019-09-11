@@ -48,7 +48,7 @@
     "jest-junit": "^8.0.0",
     "jest-mock-console": "^1.0.0",
     "lint-staged": "^9.2.5",
-    "nodegit": "^0.25.1",
+    "nodegit": "^0.26.0",
     "prettier": "^1.18.2",
     "redux-saga": "*",
     "redux-saga-test-plan": "^4.0.0-rc.1",
