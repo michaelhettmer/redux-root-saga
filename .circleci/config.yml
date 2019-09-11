@@ -73,6 +73,7 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
+            - coverage
             - reports/jest
 
   codecov:
