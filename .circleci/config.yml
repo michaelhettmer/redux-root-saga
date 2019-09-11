@@ -11,6 +11,8 @@ whitelist: &whitelist
     - coverage/*
     - dist/*
     - node_modules/*
+    - reports/*
+    - scripts/*
     - src/*
     - .eslintignore
     - .eslintrc.js
