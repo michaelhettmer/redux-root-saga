@@ -5,6 +5,7 @@
 [![license](https://img.shields.io/npm/l/redux-root-saga)](https://github.com/MichaelHettmer/redux-root-saga/blob/master/LICENSE.md)
 [![circleci](https://circleci.com/gh/MichaelHettmer/redux-root-saga.svg?style=shield)](https://circleci.com/gh/MichaelHettmer/redux-root-saga)
 [![codecov](https://codecov.io/gh/MichaelHettmer/redux-root-saga/branch/master/graph/badge.svg)](https://codecov.io/gh/MichaelHettmer/redux-root-saga)
+[![Greenkeeper badge](https://badges.greenkeeper.io/MichaelHettmer/redux-root-saga.svg)](https://greenkeeper.io/)
 [![npm version](https://img.shields.io/npm/v/redux-root-saga)](https://www.npmjs.com/package/redux-root-saga)
 [![npm downloads](https://img.shields.io/npm/dw/redux-root-saga)](https://www.npmjs.com/package/redux-root-saga)
 [![pull requests](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/MichaelHettmer/redux-root-saga/compare)
