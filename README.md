@@ -9,7 +9,7 @@
 [![npm downloads](https://img.shields.io/npm/dw/redux-root-saga)](https://www.npmjs.com/package/redux-root-saga)
 [![pull requests](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/MichaelHettmer/redux-root-saga/compare)
 [![discord](https://img.shields.io/discord/620938362379042837)](https://discord.gg/R2jNASR)
-[![twitter](https://img.shields.io/twitter/follow/MichaelHettmer.svg?label=Follow%20@MichaelHettmer)](https://twitter.com/intent/follow?screen_name=MichaelHettmer)
+[![twitter](https://img.shields.io/twitter/follow/MichaelHettmer.svg?label=Follow%20@MichaelHettmer)](https://twitter.com/intent/follow?screen_name=MichaelHettmer) [![Greenkeeper badge](https://badges.greenkeeper.io/MichaelHettmer/redux-root-saga.svg)](https://greenkeeper.io/)
 
 ## Configurable redux-saga execution management
 
