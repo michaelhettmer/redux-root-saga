@@ -57,6 +57,9 @@ jobs:
       - run:
           name: Lint TypeScript code
           command: yarn lint:ci
+      - persist_to_workspace:
+          root: ~/repo
+          <<: *whitelist
 
   test:
     <<: *defaults
