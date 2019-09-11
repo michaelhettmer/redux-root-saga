@@ -1,4 +1,4 @@
-<img src="./logo_wide_slim.png" alt="Redux Root Saga Logo" style="padding: 24px;" />
+<img src="./logo_wide_slim.png" alt="Redux Root Saga Logo" />
 
 # Redux Root Saga
 
