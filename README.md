@@ -1,3 +1,5 @@
+<img src="./logo_wide.png" alt="Redux Root Saga Logo"/>
+
 # Redux Root Saga
 
 [![license](https://img.shields.io/npm/l/redux-root-saga)](https://github.com/MichaelHettmer/redux-root-saga/blob/master/LICENSE.md)
@@ -70,4 +72,3 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootSaga);
 ```
-
