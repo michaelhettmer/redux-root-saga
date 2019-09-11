@@ -90,9 +90,9 @@ jobs:
           root: ~/repo
           <<: *whitelist
       - store_test_results:
-          path: reports/junit
+          path: reports
       - store_artifacts:
-          path: reports/junit
+          path: reports
 
   deploy:
     <<: *defaults
