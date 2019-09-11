@@ -69,4 +69,3 @@ gitBranchIs('master', function(error) {
             .catch('cannot open git repository');
     }
 });
-// check - env VERSION && git tag - a \"$VERSION\" -m \"Release of version $VERSION\" && git push origin \"$VERSION\"
