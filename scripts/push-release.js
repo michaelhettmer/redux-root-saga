@@ -40,10 +40,11 @@ git.Repository.open('.')
                 if (currentBranchName === 'master') {
                     // update npm package version number and commit modified package.json to master
                     packageJson.set('version', version).save();
+                    const cmdVersionFormat = `yarn lint:fix`;
                     const cmdVersionUpdate = `git add package.json`;
                     const cmdVersionCommit = `git commit -S -m "Bump package.json version number to ${version}"`;
                     const cmdVersionPush = `git push origin master`;
-                    const cmdVersionResult = exec(`${cmdVersionUpdate} && ${cmdVersionCommit} && ${cmdVersionPush}`);
+                    const cmdVersionResult = exec(`${cmdVersionFormat} && ${cmdVersionUpdate} && ${cmdVersionCommit} && ${cmdVersionPush}`);
                     if (!cmdVersionResult || cmdVersionResult.code !== 0) {
                         console.error('version update of package.json failed');
                         exit(1);
