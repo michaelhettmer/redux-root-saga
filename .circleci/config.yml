@@ -94,15 +94,9 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
-          name: Write NPM Token to ~/.npmrc
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-      - run:
-          name: Write version to package.json
-          command: $(yarn bin)/dot-json package.json version ${CIRCLE_TAG:1}
-      - run:
-          name: Publish to NPM
-          command: npm publish --access=public
-
+          name: Execute npm-deploy.js script
+          command: node scripts/npm-deploy.js"
+          
 workflows:
   build:
     jobs:
@@ -126,13 +120,13 @@ workflows:
       - checkout:
           filters:
             tags:
-              only: /v[0-9]+(\.[0-9]+)*/
+              only: /v[0-9]+(\.[0-9]+)*(\-rc(\.[0-9]+)?)?/
             branches:
               ignore: /.*/
       - test:
           filters:
             tags:
-              only: /v[0-9]+(\.[0-9]+)*/
+              only: /v[0-9]+(\.[0-9]+)*(\-rc(\.[0-9]+)?)?/
             branches:
               ignore: /.*/
           requires:
@@ -140,7 +134,7 @@ workflows:
       - lint:
           filters:
             tags:
-              only: /v[0-9]+(\.[0-9]+)*/
+              only: /v[0-9]+(\.[0-9]+)*(\-rc(\.[0-9]+)?)?/
             branches:
               ignore: /.*/
           requires:
@@ -148,7 +142,7 @@ workflows:
       - codecov:
           filters:
             tags:
-              only: /v[0-9]+(\.[0-9]+)*/
+              only: /v[0-9]+(\.[0-9]+)*(\-rc(\.[0-9]+)?)?/
             branches:
               ignore: /.*/
           requires:
@@ -156,7 +150,7 @@ workflows:
       - build:
           filters:
             tags:
-              only: /v[0-9]+(\.[0-9]+)*/
+              only: /v[0-9]+(\.[0-9]+)*(\-rc(\.[0-9]+)?)?/
             branches:
               ignore: /.*/
           requires:
@@ -165,7 +159,7 @@ workflows:
       - deploy:
           filters:
             tags:
-              only: /v[0-9]+(\.[0-9]+)*/
+              only: /v[0-9]+(\.[0-9]+)*(\-rc(\.[0-9]+)?)?/
             branches:
               ignore: /.*/
           requires:

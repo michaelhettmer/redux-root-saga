@@ -1,6 +1,6 @@
 {
   "name": "redux-root-saga",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Easy and configurable redux-saga execution management.",
   "keywords": [
     "nodejs",
@@ -27,6 +27,7 @@
     "build": "tsc",
     "lint": "eslint . --ext '.js,.jsx,.ts,.tsx,.json,.jsonc'",
     "lint:fix": "yarn lint --fix",
+    "release": "node scripts/push-release.js",
     "test": "jest",
     "test:ci": "CI=true yarn test:coverage",
     "test:coverage": "yarn test --coverage --watchAll=false"
@@ -45,9 +46,11 @@
     "jest": "^24.9.0",
     "jest-mock-console": "^1.0.0",
     "lint-staged": "^9.2.5",
+    "nodegit": "^0.25.1",
     "prettier": "^1.18.2",
     "redux-saga": "*",
     "redux-saga-test-plan": "^4.0.0-rc.1",
+    "shelljs": "^0.8.3",
     "ts-jest": "^24.0.2",
     "typescript": "^3.6.2"
   },
