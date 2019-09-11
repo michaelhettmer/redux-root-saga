@@ -58,14 +58,17 @@ const rootSaga = createRootSaga([saga1, saga2]);
 // Option 2: Start all sagas with (partly) customized default options.
 const rootSaga = createRootSaga([saga1, saga2], {
     maxRetries: 3,
-    errorHandler: (error, saga, options) => console.err( `Error in saga ${saga.name} with options ${options}: ${error}` );
+    errorHandler: (error, saga, options) => console.err(
+        `Error in saga ${saga.name} with options ${options}: ${error}`);
 });
 
-// Option 3: Start all sagas with (partly) customized default options and use specific custom options only for saga1.
+// Option 3: Start all sagas with (partly) customized default options
+// and use specific custom options only for saga1.
 // All other options of saga1 fallback to the (customized) default ones.
 const rootSaga = createRootSaga([[saga1, { maxRetries: Infinity }], saga2], {
     maxRetries: 3,
-    onError: (error, saga, options) => console.error( `Error in saga ${saga.name} with options ${options}: ${error}` ),
+    onError: (error, saga, options) => console.error(
+        `Error in saga ${saga.name} with options ${options}: ${error}`),
 });
 
 const sagaMiddleware = createSagaMiddleware();
