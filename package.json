@@ -26,11 +26,11 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint . --ext '.js,.jsx,.ts,.tsx,.json,.jsonc'",
-    "lint:ci": "yarn lint --format junit --output-file ./reports/junit/ts-lint-results.xml",
+    "lint:ci": "yarn lint --format junit --output-file ./reports/eslint/ts-lint-results.xml",
     "lint:fix": "yarn lint --fix",
     "release": "node scripts/push-release.js",
     "test": "jest",
-    "test:ci": "CI=true JEST_JUNIT_OUTPUT_DIR=./reports/junit JEST_JUNIT_OUTPUT_NAME=ts-test-results.xml yarn test:coverage --runInBand --reporters=\"default\" --reporters=\"jest-junit\"",
+    "test:ci": "CI=true JEST_JUNIT_OUTPUT_DIR=./reports/jest JEST_JUNIT_OUTPUT_NAME=ts-test-results.xml yarn test:coverage --runInBand --reporters=\"default\" --reporters=\"jest-junit\"",
     "test:coverage": "yarn test --coverage --watchAll=false"
   },
   "dependencies": {},
