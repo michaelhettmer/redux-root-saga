@@ -24,48 +24,43 @@ if (!versionString || typeof versionString !== 'string' || (versionString && ver
     exit(1);
 }
 
-gitBranchIs('master', function(error) {
-    if (error) console.error(error);
-    else {
-        const packageJson = new DotJson('package.json');
-        const oldVersion = (packageJson && packageJson.get('version')) || '';
-        if (!packageJson || !oldVersion || oldVersion.length === 0) {
-            console.log('package.json is invalid or cannot be read');
-            exit(1);
-        }
+const packageJson = new DotJson('package.json');
+const oldVersion = (packageJson && packageJson.get('version')) || '';
+if (!packageJson || !oldVersion || oldVersion.length === 0) {
+    console.log('package.json is invalid or cannot be read');
+    exit(1);
+}
 
-        git.Repository.open('.')
-            .then(function(repository) {
-                repository
-                    .getCurrentBranch()
-                    .then(function(result) {
-                        const currentBranchName = result.shorthand();
-                        if (currentBranchName === 'master') {
-                            // update npm package version number
-                            packageJson.set('version', version).save();
-                            const cmdVersionUpdate = `git add package.json 
+git.Repository.open('.')
+    .then(function(repository) {
+        repository
+            .getCurrentBranch()
+            .then(function(result) {
+                const currentBranchName = result.shorthand();
+                if (currentBranchName === 'master') {
+                    // update npm package version number
+                    packageJson.set('version', version).save();
+                    const cmdVersionUpdate = `git add package.json 
                                 && git commit -S -m "Bump package.json version number to ${version}"
                                 && git push origin master`;
-                            const versionUpdateResult = exec(`${cmdVersionUpdate}`);
-                            if (!versionUpdateResult || versionUpdateResult.code !== 0) {
-                                console.error('version update of package.json failed');
-                                exit(1);
-                            }
+                    const versionUpdateResult = exec(`${cmdVersionUpdate}`);
+                    if (!versionUpdateResult || versionUpdateResult.code !== 0) {
+                        console.error('version update of package.json failed');
+                        exit(1);
+                    }
 
-                            // create and push release tag
-                            const cmdTag = `git tag -s "${versionString}" -m "Release of ${versionString}"`;
-                            const cmdPushTag = `git push origin "${versionString}"`;
-                            const tagResult = exec(`${cmdTag} && ${cmdPushTag}`);
-                            if (!tagResult || tagResult.code !== 0) {
-                                console.error('release tag creation / push failed');
-                                exit(1);
-                            } else console.log('successfully tagged a new release');
-                        } else console.error("can't release from branch", currentBranchName);
-                    })
-                    .catch(function(reason) {
-                        console.error('cannot get git branch name: ', reason);
-                    });
+                    // create and push release tag
+                    const cmdTag = `git tag -s "${versionString}" -m "Release of ${versionString}"`;
+                    const cmdPushTag = `git push origin "${versionString}"`;
+                    const tagResult = exec(`${cmdTag} && ${cmdPushTag}`);
+                    if (!tagResult || tagResult.code !== 0) {
+                        console.error('release tag creation / push failed');
+                        exit(1);
+                    } else console.log('successfully tagged a new release');
+                } else console.error("can't release from branch", currentBranchName);
             })
-            .catch('cannot open git repository');
-    }
-});
+            .catch(function(reason) {
+                console.error('cannot get git branch name: ', reason);
+            });
+    })
+    .catch('cannot open git repository');
