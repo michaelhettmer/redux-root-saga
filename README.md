@@ -28,6 +28,8 @@ Additionally the root saga behavior was extended by the following fully configur
 
 ### Install
 
+#### Latest stable release
+
 ``` sh
 npm install --save redux-root-saga
 ```
@@ -36,6 +38,18 @@ or
 
 ``` sh
 yarn add redux-root-saga
+```
+
+#### Latest Release Candidate
+
+``` sh
+npm install --save redux-root-saga@next
+```
+
+or
+
+``` sh
+yarn add redux-root-saga@next
 ```
 
 ### Usage Example
