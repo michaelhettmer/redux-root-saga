@@ -56,7 +56,7 @@ jobs:
           at: ~/repo
       - run:
           name: Lint TypeScript code
-          command: yarn lint
+          command: yarn lint:ci
 
   test:
     <<: *defaults
@@ -90,9 +90,9 @@ jobs:
           root: ~/repo
           <<: *whitelist
       - store_test_results:
-          path: reports
+          path: reports/junit
       - store_artifacts:
-          path: reports
+          path: reports/junit
 
   deploy:
     <<: *defaults
