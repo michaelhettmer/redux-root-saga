@@ -59,7 +59,8 @@ jobs:
           command: yarn lint:ci
       - persist_to_workspace:
           root: ~/repo
-          <<: *whitelist
+          paths:
+            - reports/eslint
 
   test:
     <<: *defaults
@@ -71,7 +72,8 @@ jobs:
           command: yarn test:ci
       - persist_to_workspace:
           root: ~/repo
-          <<: *whitelist
+          paths:
+            - reports/jest
 
   codecov:
     <<: *defaults
