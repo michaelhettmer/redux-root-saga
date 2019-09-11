@@ -87,6 +87,10 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           <<: *whitelist
+      - store_test_results:
+          path: reports/junit
+      - store_artifacts:
+          path: reports/junit
 
   deploy:
     <<: *defaults
@@ -95,7 +99,7 @@ jobs:
           at: ~/repo
       - run:
           name: Execute npm-deploy.js script
-          command: node scripts/npm-deploy.js"
+          command: node scripts/npm-deploy.js
           
 workflows:
   build:
