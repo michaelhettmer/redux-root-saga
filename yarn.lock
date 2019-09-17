@@ -3509,10 +3509,10 @@ nodegit-promise@~4.0.0:
   dependencies:
     asap "~2.0.3"
 
-nodegit@^0.25.1:
-  version "0.25.1"
-  resolved "https://registry.yarnpkg.com/nodegit/-/nodegit-0.25.1.tgz#70b9d89e62cbc1153237a10a196e3228a669895b"
-  integrity sha512-j2kEd4jTraimRPKDX31DsLcfY9fWpcYG8zT0tiLVtN5jMm9fDFgn3WOQ+Nk+3NcBqxr4p5N5pZqNrCS0nGdTbg==
+nodegit@^0.26.0:
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/nodegit/-/nodegit-0.26.1.tgz#2fc97ea69b186143ba2f469489d555ded1cdbb01"
+  integrity sha512-ZNky4TMBob4ld2eWyfwjlhsaY8H5vniDtW7ENy6TbfIF40D844uDLdJ+JAf++6lENKBPPClKvGza8h0ohN0IZg==
   dependencies:
     fs-extra "^7.0.0"
     json5 "^2.1.0"
@@ -4105,7 +4105,7 @@ redux-saga-test-plan@^4.0.0-rc.1:
     object-assign "^4.1.0"
     util-inspect "^0.1.8"
 
-redux-saga@*:
+redux-saga@1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-1.0.5.tgz#03317261bc5fa7ee2ecb778f4e4848f573557bbb"
   integrity sha512-ytGFtaHyz6NQMQp7/LpQ/6CtOkbPRCcAeljUpc4c95hRm5U6dFvrRiZHeBPuQZ56L3oXfTX3hiYh8/3ZudsiNg==
