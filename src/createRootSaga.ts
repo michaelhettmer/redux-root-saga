@@ -47,7 +47,7 @@ export interface Options {
 const createRootSaga = (
     sagas: (Saga | [Saga, Options])[],
     { onError = defaultErrorHandler, restartDelay = 1000, maxRetries = Infinity }: Options = {},
-): (() => Generator<CombinatorEffect<'ALL', SimpleEffect<'FORK', ForkEffectDescriptor>>, void, unknown>) => {
+): (() => Generator<CombinatorEffect<'ALL', SimpleEffect<'FORK', ForkEffectDescriptor<void>>>, void, unknown>) => {
     return function* rootSaga() {
         yield all(
             sagas.map(sagaParam =>
