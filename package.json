@@ -50,7 +50,7 @@
     "lint-staged": "^9.2.5",
     "nodegit": "^0.26.1",
     "prettier": "^1.18.2",
-    "redux-saga": "1.1.1",
+    "redux-saga": "1.1.2",
     "redux-saga-test-plan": "^4.0.0-rc.1",
     "shelljs": "^0.8.3",
     "ts-jest": "^24.1.0",
