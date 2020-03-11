@@ -67,7 +67,13 @@ describe('test saga management with createRootSaga', () => {
         }
         mockConsole('warn');
         await expectSaga(
-            createRootSaga([[saga, {}], [saga, { maxRetries: 3 }]], { maxRetries: 2, restartDelay: 0 }),
+            createRootSaga(
+                [
+                    [saga, {}],
+                    [saga, { maxRetries: 3 }],
+                ],
+                { maxRetries: 2, restartDelay: 0 },
+            ),
         ).run();
         expect(console.warn).toHaveBeenCalledTimes(7);
     });
