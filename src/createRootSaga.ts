@@ -50,7 +50,7 @@ const createRootSaga = (
 ): (() => Generator<CombinatorEffect<'ALL', SimpleEffect<'FORK', ForkEffectDescriptor<void>>>, void, unknown>) => {
     return function* rootSaga() {
         yield all(
-            sagas.map(sagaParam =>
+            sagas.map((sagaParam) =>
                 spawn(function* spawnedSaga() {
                     // If saga is passed inside a tuple with custom options extract both
                     const saga = sagaParam instanceof Array ? sagaParam[0] : sagaParam;
