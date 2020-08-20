@@ -71,7 +71,7 @@
         "semantic-release": "17.1.1",
         "shelljs": "0.8.4",
         "ts-jest": "26.2.0",
-        "typescript": "3.9.7"
+        "typescript": "4.0.2"
     },
     "peerDependencies": {
         "redux-saga": ">=1.0.5"
